@@ -3,7 +3,7 @@ import cors from 'cors';
 import routes from '../api';
 import config from '../config';
 import Logger from './logger';
-
+import { errorConverter, handleError } from '../helpers/error';
 export default ({ app }) => {
   /**
    * Health Check endpoints
@@ -47,22 +47,17 @@ export default ({ app }) => {
     next(err);
   });
 
+  app.use(errorConverter);
+
   /// error handlers
-  app.use((err, req, res, next) => {
-    /**
-     * Handle 401 thrown by express-jwt library
-     */
-    if (err.name === 'UnauthorizedError') {
-      return res.status(err.status).send({ message: err.message }).end();
-    }
-    return next(err);
-  });
-  app.use((err, req, res, next) => {
-    res.status(err.status || 500);
-    res.json({
-      errors: {
-        message: err.message,
-      },
-    });
-  });
+  app.use(handleError);
+
+  // app.use((err, req, res, next) => {
+  //   res.status(err.status || 500);
+  //   res.json({
+  //     errors: {
+  //       message: err.message,
+  //     },
+  //   });
+  // });
 };

@@ -1,12 +1,10 @@
 import { Router } from 'express';
 import { Container } from 'typedi';
 import Models from '../../models';
-const { User } = Models;
-import config from '../../config';
-// const q = faunadb.query;
-// const client = new faunadb.Client({ secret: config.fuanadbKey });
+import * as UserService from '../../services/user.service';
 
-// import middlewares from '../middlewares';
+const { User } = Models;
+
 const route = Router();
 
 export default app => {
@@ -27,6 +25,21 @@ export default app => {
   });
   route.get('/search', async (req, res, next) => {});
 
+  route.delete('/', async (req, res, next) => {
+    const logger = Container.get('logger');
+    try {
+      const { id } = req.body;
+      const user = await UserService.deleteUserById(id);
+      return res.json({
+        ok: true,
+        message: 'User deleted',
+        user,
+      });
+    } catch (e) {
+      logger.error('🔥 error: %o', e);
+      return next(e);
+    }
+  });
   route.post('/signup', async (req, res) => {
     const logger = Container.get('logger');
     try {
