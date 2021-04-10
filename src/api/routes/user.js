@@ -15,44 +15,31 @@ export default app => {
   route.get('/', async (req, res, next) => {
     const logger = Container.get('logger');
     try {
-      const users = [];
-      const from = await User.from();
-      console.log({ from });
-      // const newUsers = await User.from();
-      return res.status(200).json({ users });
-    } catch (e) {
-      logger.error('🔥 error: %o', e);
-      return next(e);
-    }
-  });
-  route.get('/search', async (req, res, next) => {
-    const logger = Container.get('logger');
-    // const client = Container.get('client');
-    // const q = Container.get('q');
-    try {
-      let { size = 20, text } = req.query;
+      const limit = 50;
+      let { size = 20 } = req.query;
       size = Number(size);
-      const posts = await client.query(q.Paginate(q.Documents(q.Collection('posts')), { size }));
-      return res.status(200).json({ posts: posts });
+      const users = await User.findAll().limit(limit);
+      return res.status(200).json({ data: users, limit, size });
     } catch (e) {
       logger.error('🔥 error: %o', e);
       return next(e);
     }
   });
+  route.get('/search', async (req, res, next) => {});
 
-  route.post('/', async (req, res) => {
+  route.post('/signup', async (req, res) => {
     const logger = Container.get('logger');
-    const client = Container.get('client');
-    const q = Container.get('q');
     try {
-      const post = {
+      const user = await User.create({
         ...req.body,
-        createdAt: new Date(),
-        photos: [],
-        // userId: "user",
-      };
-      const faunaPosts = await client.query(q.Create(q.Collection('posts'), { data: post }));
-      return res.json({ post, message: 'Post Created!' });
+        balance: 0,
+      });
+      const realUser = await User.findById(user[0]);
+      return res.json({
+        ok: true,
+        message: 'User created',
+        user: realUser,
+      });
     } catch (e) {
       logger.error('🔥 error: %o', e);
       return next(e);

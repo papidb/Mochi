@@ -10,7 +10,7 @@ export default ({ /** knex = {}, */ name = 'name', tableName = 'tablename', sele
   const create = props => {
     delete props.id; // not allowed to set `id`
 
-    return knex.insert(props).returning(selectableProps).into(tableName).timeout(timeout);
+    return knex.insert(props, '*').into(tableName).timeout(timeout);
   };
 
   const findAll = () => knex.select(selectableProps).from(tableName).timeout(timeout);
@@ -25,7 +25,7 @@ export default ({ /** knex = {}, */ name = 'name', tableName = 'tablename', sele
       return results[0];
     });
 
-  const findById = id => knex.select(selectableProps).from(tableName).where({ id }).timeout(timeout);
+  const findById = id => knex.select(selectableProps).from(tableName).where({ id }).first().timeout(timeout);
 
   const update = (id, props) => {
     delete props.id; // not allowed to set `id`
@@ -35,7 +35,7 @@ export default ({ /** knex = {}, */ name = 'name', tableName = 'tablename', sele
 
   const destroy = id => knex.del().from(tableName).where({ id }).timeout(timeout);
 
-  const from = () => knex.select(selectableProps).from(tableName);
+  // const from = () => knex.select(selectableProps).from(tableName);
   return {
     name,
     tableName,
@@ -48,6 +48,6 @@ export default ({ /** knex = {}, */ name = 'name', tableName = 'tablename', sele
     findById,
     update,
     destroy,
-    from,
+    // from,
   };
 };

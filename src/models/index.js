@@ -30,3 +30,5 @@ const models = {
 };
 
 export default models;
+
+// export const User =  UserModel(knex).catch(err => console.error({err})),
