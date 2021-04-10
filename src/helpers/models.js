@@ -6,12 +6,7 @@ import knex from '../../knex/knex';
 // The idea is that these are the most-used types of functions that most/all
 // "models" will want to have. They can be overriden/modified/extended if
 // needed by composing a new object out of the one returned by this function ;)
-export default async ({
-  /** knex = {}, */ name = 'name',
-  tableName = 'tablename',
-  selectableProps = [],
-  timeout = 1000,
-}) => {
+export default ({ /** knex = {}, */ name = 'name', tableName = 'tablename', selectableProps = [], timeout = 1000 }) => {
   const create = props => {
     delete props.id; // not allowed to set `id`
 

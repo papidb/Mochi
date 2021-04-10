@@ -1,6 +1,18 @@
 // Update with your config settings.
+const dotenv = require('dotenv');
+const appRoot = require('app-root-path');
 
-export default {
+// Set the NODE_ENV to 'development' by default
+process.env.NODE_ENV = process.env.NODE_ENV || 'development';
+const envPath = appRoot.toString() + '/.env';
+
+const envFound = dotenv.config({ path: envPath });
+if (envFound.error) {
+  // This error should crash whole process
+  throw new Error("⚠️  Couldn't find .env file  ⚠️");
+}
+
+module.exports = {
   development: {
     client: 'mysql2',
     connection: {

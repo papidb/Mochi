@@ -6,7 +6,7 @@ const tableName = 'users';
 
 // Properties that are allowed to be selected from the database for reading.
 // (e.g., `password` is not included and thus cannot be selected)
-const selectableProps = ['id', 'username', 'email', 'updated_at', 'created_at'];
+const selectableProps = ['id', 'username', 'created_at'];
 
 // Bcrypt functions used for hashing password and later verifying it.
 const SALT_ROUNDS = 10;
@@ -24,7 +24,7 @@ const beforeSave = user => {
     .catch(err => `Error hashing password: ${err}`);
 };
 
-const initModel = async knex => {
+const initModel = knex => {
   const guts = createModel({
     // knex,
     name,
