@@ -1,6 +1,7 @@
 import { Router } from 'express';
 import { Container } from 'typedi';
-// import faunadb from 'faunadb';
+import Models from '../../models';
+const { User } = Models;
 import config from '../../config';
 // const q = faunadb.query;
 // const client = new faunadb.Client({ secret: config.fuanadbKey });
@@ -9,17 +10,16 @@ import config from '../../config';
 const route = Router();
 
 export default app => {
-  app.use('/posts', route);
+  app.use('/users', route);
 
   route.get('/', async (req, res, next) => {
     const logger = Container.get('logger');
-    // const client = Container.get('client');
-    // const q = Container.get('q');
     try {
-      let { size = 20 } = req.query;
-      size = Number(size);
-      const posts = await client.query(q.Paginate(q.Documents(q.Collection('posts')), { size }));
-      return res.status(200).json({ posts: posts });
+      const users = [];
+      const from = await User.from();
+      console.log({ from });
+      // const newUsers = await User.from();
+      return res.status(200).json({ users });
     } catch (e) {
       logger.error('🔥 error: %o', e);
       return next(e);

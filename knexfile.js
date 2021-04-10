@@ -2,7 +2,7 @@
 
 export default {
   development: {
-    client: 'mysql',
+    client: 'mysql2',
     connection: {
       database: process.env.DB_NAME,
       user: process.env.DB_USERNAME,
@@ -24,7 +24,7 @@ export default {
   },
 
   staging: {
-    client: 'mysql',
+    client: 'mysql2',
     connection: {
       database: process.env.DB_NAME,
       user: process.env.DB_USERNAME,
@@ -40,7 +40,7 @@ export default {
   },
 
   production: {
-    client: 'mysql',
+    client: 'mysql2',
     connection: {
       database: process.env.DB_NAME,
       user: process.env.DB_USERNAME,
