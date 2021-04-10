@@ -11,7 +11,6 @@ if (envFound.error) {
 }
 
 export default {
-  fuanadbKey: process.env.FUANA_NODE_KEY,
   /**
    * My favorite port
    */
