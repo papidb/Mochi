@@ -1,4 +1,11 @@
 const tableName = 'users';
+import { Knex } from 'knex';
+
+/**
+ * setup db
+ * @param {Knex} knex
+ * @returns {Promise<Knex.SchemaBuilder>}
+ */
 exports.up = function (knex) {
   return knex.schema.createTable(tableName, function (table) {
     table.increments('id').primary().unsigned();
@@ -9,6 +16,11 @@ exports.up = function (knex) {
   });
 };
 
+/**
+ * drop database
+ * @param {Knex} knex
+ * @returns {Promise<Knex.SchemaBuilder>}
+ */
 exports.down = function (knex) {
   return knex.schema.dropTable(tableName);
 };
