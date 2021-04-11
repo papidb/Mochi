@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 
 import tokenTypes from './tokens';
+import transactionTypes from './transactions';
 
 const envVars = process.env;
 
@@ -49,4 +50,5 @@ export default {
   },
 
   tokenTypes,
+  transactionTypes,
 };
