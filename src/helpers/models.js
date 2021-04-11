@@ -16,14 +16,15 @@ export default ({ /** knex = {}, */ name = 'name', tableName = 'tablename', sele
   const findAll = () => knex.select(selectableProps).from(tableName).timeout(timeout);
 
   const find = filters => knex.select(selectableProps).from(tableName).where(filters).timeout(timeout);
+  const findOne = filters => knex.select(selectableProps).from(tableName).where(filters).first().timeout(timeout);
 
-  // Same as `find` but only returns the first match if >1 are found.
-  const findOne = filters =>
-    find(filters).then(results => {
-      if (!Array.isArray(results)) return results;
+  // // Same as `find` but only returns the first match if >1 are found.
+  // const findOne = filters =>
+  //   find(filters).then(results => {
+  //     if (!Array.isArray(results)) return results;
 
-      return results[0];
-    });
+  //     return results[0];
+  //   });
 
   const findById = id => knex.select(selectableProps).from(tableName).where({ id }).first().timeout(timeout);
 
