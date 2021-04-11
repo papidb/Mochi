@@ -1,5 +1,7 @@
 import bcrypt from 'bcrypt';
 import createModel from '../helpers/models';
+import ApiError from '../utils/ApiError';
+import httpStatus from 'http-status';
 
 const name = 'User';
 const tableName = 'users';
@@ -43,24 +45,14 @@ const initModel = knex => {
   // Augment default `create` function to include custom `beforeSave` logic.
   const create = props => beforeSave(props).then(user => guts.create(user));
 
-  const verify = (username, password) => {
-    const matchErrorMsg = 'Username or password do not match';
+  const verify = async (username, password) => {
+    const matchErrorMsg = 'Incorrect username or password';
 
-    return knex
-      .select()
-      .from(tableName)
-      .where({ username })
-      .timeout(guts.timeout)
-      .then(user => {
-        if (!user) throw matchErrorMsg;
-        return user;
-      })
-      .then(user => Promise.all([user, verifyPassword(password, user.password)]))
-      .then(([user, isMatch]) => {
-        if (!isMatch) throw matchErrorMsg;
-
-        return user;
-      });
+    const user = await knex.select().from(tableName).where({ username }).first().timeout(guts.timeout);
+    if (!user) throw new ApiError(httpStatus.UNAUTHORIZED, matchErrorMsg);
+    const isMatch = await verifyPassword(password, user.password);
+    if (!isMatch) throw new ApiError(httpStatus.UNAUTHORIZED, matchErrorMsg);
+    return user;
   };
 
   return {
