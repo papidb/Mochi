@@ -10,6 +10,11 @@ const { User } = Models;
  */
 export const getUserById = async id => User.findById(id);
 
+/**
+ * Get user by username
+ * @param {ObjectId} username
+ * @returns {Promise<User>}
+ */
 export const getUserByUsername = async username => User.findOne({ username });
 
 /**
