@@ -1,5 +1,5 @@
-const tableName = 'users';
 import { Knex } from 'knex';
+const tableName = 'users';
 
 /**
  * setup db
