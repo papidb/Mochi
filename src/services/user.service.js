@@ -10,6 +10,8 @@ const { User } = Models;
  */
 export const getUserById = async id => User.findById(id);
 
+export const getUserByUsername = async username => User.findOne({ username });
+
 /**
  * Delete user by id
  * @param {ObjectId} userId

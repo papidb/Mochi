@@ -3,7 +3,10 @@ import cors from 'cors';
 import routes from '../api';
 import config from '../config';
 import Logger from './logger';
+import passport from 'passport';
 import { errorConverter, handleError } from '../helpers/error';
+import jwtStrategy from '../helpers/passport';
+
 export default ({ app }) => {
   /**
    * Health Check endpoints
@@ -37,6 +40,11 @@ export default ({ app }) => {
 
   // Middleware that transforms the raw string of req.body into json
   app.use(bodyParser.json());
+
+  // jwt authentication
+  app.use(passport.initialize());
+  passport.use('jwt', jwtStrategy);
+
   // Load API routes
   app.use(config.api.prefix, routes());
 

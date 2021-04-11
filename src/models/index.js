@@ -2,6 +2,7 @@ import fs from 'fs';
 import path from 'path';
 import knex from '../../knex/knex';
 import UserModel from './User.model';
+import TokenModel from './Token.model';
 
 const getModelFiles = dir =>
   fs
@@ -27,6 +28,7 @@ const files = getModelFiles(__dirname);
 
 const models = {
   User: UserModel(knex),
+  Token: TokenModel(knex),
 };
 
 export default models;

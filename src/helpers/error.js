@@ -29,5 +29,5 @@ export const handleError = (err, req, res, next) => {
   if (config.env === 'development') {
     logger.error(err);
   }
-  res.status(statusCode).send(response);
+  return res.status(statusCode).send(response);
 };
