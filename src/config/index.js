@@ -1,6 +1,7 @@
 import dotenv from 'dotenv';
 
 import tokenTypes from './tokens';
+import transactionTypes from './transactions';
 
 const envVars = process.env;
 
@@ -49,4 +50,10 @@ export default {
   },
 
   tokenTypes,
+  transactionTypes,
+
+  paystack: {
+    sk: envVars.SECRET_KEY_PAYSTACK,
+    pk: envVars.PUBLIC_KEY_PAYSTACK,
+  },
 };
