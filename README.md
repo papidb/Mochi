@@ -42,7 +42,7 @@ List of available routes:
 
 ## Features
 
-- **MySql database**: [MongoDB](https://www.mysql.com) object data modeling using [Knex](http://knexjs.org)
+- **MySql database**: [Mysql](https://www.mysql.com) object data modeling using [Knex](http://knexjs.org)
 - **Authentication and authorization**: using [passport](http://www.passportjs.org)
 - **Logging**: using [winston](https://github.com/winstonjs/winston) and [morgan](https://github.com/expressjs/morgan)
 - **Error handling**: centralized error handling mechanism
