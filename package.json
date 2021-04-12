@@ -8,7 +8,11 @@
     "dev": "nodemon",
     "test": "jest",
     "lint": "npm run lint:js ",
-    "lint:js": "eslint"
+    "lint:js": "eslint",
+    "install": "yarn install",
+    "cp_env": "cp .env.example .env",
+    "migrate:latest": "knex migrate:latest",
+    "init": "yarn install && yarn cp_env && migrate:latest"
   },
   "repository": {
     "type": "git",
