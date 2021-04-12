@@ -4,7 +4,8 @@
   "description": "Job hunting with flames",
   "main": "src/app.js",
   "scripts": {
-    "start": "nodemon",
+    "start": "pm2 start ecosystem.config.json --no-daemon",
+    "dev": "nodemon",
     "test": "jest",
     "lint": "npm run lint:js ",
     "lint:js": "eslint"
@@ -45,6 +46,7 @@
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
     "paystack": "^2.0.1",
+    "pm2": "^4.5.6",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.6.2",
     "typedi": "^0.10.0",
