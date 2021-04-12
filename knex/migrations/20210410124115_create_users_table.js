@@ -1,4 +1,4 @@
-import { Knex } from 'knex';
+const { Knex } = require('knex');
 const tableName = 'users';
 
 /**

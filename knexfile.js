@@ -26,8 +26,6 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations',
-    },
-    migrations: {
       directory: __dirname + '/knex/migrations',
     },
     seeds: {
@@ -48,15 +46,21 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations',
+      directory: __dirname + '/knex/migrations',
+    },
+    seeds: {
+      directory: __dirname + '/knex/seeds',
     },
   },
 
   production: {
     client: 'mysql2',
     connection: {
+      host: process.env.SQL_SERVER,
       database: process.env.DB_NAME,
       user: process.env.DB_USERNAME,
       password: process.env.DB_PASSWORD,
+      port: 27694,
     },
     pool: {
       min: 2,
@@ -64,6 +68,10 @@ module.exports = {
     },
     migrations: {
       tableName: 'knex_migrations',
+      directory: __dirname + '/knex/migrations',
+    },
+    seeds: {
+      directory: __dirname + '/knex/seeds',
     },
   },
 };
