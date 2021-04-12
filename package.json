@@ -44,6 +44,7 @@
     "mysql2": "^2.2.5",
     "passport": "^0.4.1",
     "passport-jwt": "^4.0.0",
+    "paystack": "^2.0.1",
     "reflect-metadata": "^0.1.13",
     "sequelize": "^6.6.2",
     "typedi": "^0.10.0",

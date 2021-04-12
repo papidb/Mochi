@@ -51,4 +51,9 @@ export default {
 
   tokenTypes,
   transactionTypes,
+
+  paystack: {
+    sk: envVars.SECRET_KEY_PAYSTACK,
+    pk: envVars.PUBLIC_KEY_PAYSTACK,
+  },
 };
